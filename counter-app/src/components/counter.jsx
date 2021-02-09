@@ -12,13 +12,24 @@ class Counter extends Component {
     fontWeight: "bold",
   };
 
+  //one way to handle event handlers. The other way is using arrow functions
+  /*constructor() {
+    super();
+    this.handleIncrement = this.handleIncrement.bind(this);
+  }*/
+
   render() {
     return (
       <React.Fragment>
         <span style={this.styles} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
-        <button className="btn btn-secondary btn-sm">Increment</button>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
         {this.state.tags.length === 0 && <p>Please create a new tag!</p>}
         {this.renderTags()}
       </React.Fragment>
@@ -46,6 +57,10 @@ class Counter extends Component {
       </ul>
     );
   }
+
+  handleIncrement = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
 }
 
 export default Counter;
