@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0,
+    value: this.props.value,
     tags: ["tag1", "tag2", "tag3"],
   };
 
@@ -21,11 +21,12 @@ class Counter extends Component {
   render() {
     return (
       <React.Fragment>
+        <h4>Counter #{this.props.id}</h4>
         <span style={this.styles} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
         <button
-          onClick={this.handleIncrement}
+          onClick={() => this.handleIncrement({ id: 1 })}
           className="btn btn-secondary btn-sm"
         >
           Increment
@@ -34,6 +35,9 @@ class Counter extends Component {
         {this.renderTags()}
       </React.Fragment>
     );
+
+    //if I want to access the content passed by the father component I should do
+    //{this.props.children}
   }
 
   getBadgeClasses() {
@@ -43,8 +47,8 @@ class Counter extends Component {
   }
 
   formatCount() {
-    const { count } = this.state;
-    return count === 0 ? "Zero" : count;
+    const { value } = this.state;
+    return value === 0 ? "Zero" : value;
   }
 
   renderTags() {
@@ -58,8 +62,9 @@ class Counter extends Component {
     );
   }
 
-  handleIncrement = () => {
-    this.setState({ count: this.state.count + 1 });
+  handleIncrement = (product) => {
+    console.log(product);
+    this.setState({ value: this.state.value + 1 });
   };
 }
 
