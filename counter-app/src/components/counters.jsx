@@ -26,13 +26,22 @@ class Counters extends Component {
     return (
       <div>
         {this.state.counters.map((counter) => (
-          <Counter key={counter.id} value={counter.value} id={counter.id}>
+          <Counter
+            key={counter.id}
+            value={counter.value}
+            id={counter.id}
+            onDelete={this.handleDelete}
+          >
             <h4>Counter # {counter.id}</h4>
           </Counter>
         ))}
       </div>
     );
   }
+
+  handleDelete = () => {
+    console.log("Clicked the delete button");
+  };
 
   //It is possible to pass content as children to counter component like this
 
